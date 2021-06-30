@@ -1,17 +1,29 @@
 import React from "react";
-import Product from "./product/Product"
-import { useProducts } from '../../../context/ProductsContext';
+import Product from "./product/Product";
+import { useProducts } from "../../../context/ProductsContext";
 
-function Products() {  
+
+function Products() {
   const { products } = useProducts();
-  return (
  
-    <ol className="products__list">
-        {products.map((product) => ( <Product key={product.sku} product={product} />))}
-    </ol>
+  const productsView =  products.map((product) => (
+      <Product key={product.sku} product={product} />
+    ));
 
+   
+  
+  return (
+    <section className="main__products products">
+    <div id="produtosView">
+    <div className="products__row">
+      <ol className="products__list">
+        {productsView}       
+      </ol>
+      
+    </div>
+    </div>
+    </section>
   );
 }
-//{products.map((product) => ( <Product key={product.sku} product={product} />))} 
-//AddMessage("Produtos importados com sucesso!")
+
 export default Products;

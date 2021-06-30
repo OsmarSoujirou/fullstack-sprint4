@@ -223,11 +223,12 @@ html input {
   margin-bottom: 20px;
 }
 .main__products .products__row {
-  margin: 8px;
+  
 }
 .main__products .products__list {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 @media (max-width: 1200px) {
   .main__products .products__list {
@@ -239,17 +240,21 @@ html input {
     flex-basis: 50%;
   }
 }
+.products__card {
+  max-width: 24%;
+}
 .main__products .products__card .card {
   cursor: pointer;
   border: 1px solid white;
-  padding: 8px;
+  
+  
 }
 .main__products .products__card .card:hover {
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 .main__products .products__card .card__img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  
 }
 .main__products .products__card .card__description {
   font-size: 0.6875rem;

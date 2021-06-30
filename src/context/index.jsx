@@ -1,13 +1,16 @@
-import React from 'react';
-import { ProductsProvider } from './ProductsContext';
-import { MessageProvider } from './MessageContext';
+import React from "react";
+import { ProductsProvider } from "./ProductsContext";
+import { MessageProvider } from "./MessageContext";
+import { CategoriesProvider } from "./CategoriesContext";
 
 const AppProvider = ({ children }) => {
   return (
     <MessageProvider>
-     <ProductsProvider>
-     {children}
-     </ProductsProvider>
+      <ProductsProvider>
+        <CategoriesProvider>
+          {children}
+        </CategoriesProvider>
+      </ProductsProvider>
     </MessageProvider>
   );
 };

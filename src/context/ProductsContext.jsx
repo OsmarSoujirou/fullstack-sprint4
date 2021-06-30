@@ -1,43 +1,39 @@
-import React, { useState, createContext, useEffect, useContext, useCallback } from "react";
-import { useMessage } from './MessageContext';
+import React, { useState, createContext, useEffect, useContext } from "react";
+import { ProductsService } from "../services/ProductsService";
+import { useMessage } from "./MessageContext";
 
 const ProductsContext = createContext();
 
 const useProducts = () => {
-    const context =  useContext(ProductsContext);
-    return context;
-  
-  };
+  const context = useContext(ProductsContext);
+  return context;
+};
 
 const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const { AddMessage } = useMessage();
 
   useEffect(() => {
-   AllProducts();
-  }, []);
+    console.log();
+    const AllProducts = async () => {
+      let json;
 
-
-  const AllProducts = useCallback(async () => {
-    let response;
-    let json;
-
-    try {
-      response = await fetch(
-        "http://localhost:3000/data/products.json"
-      );
-      if (!response.ok) {
-        AddMessage("Erro ao carregar os dados dos produtos !");
+      try {
+        json = await ProductsService(
+          "http://localhost:3000/data/products.json"
+        );
+      } finally {
+        if (json === undefined) {
+          AddMessage({ msg: "Erro ao carregar os dados dos produtos !" });
+        } else {
+          setProducts(json.products);
+          console.log("Categorias importados com sucesso!")
+          AddMessage({ msg: "Produtos importados com sucesso!" });
+        }
       }
-      
-      json = await response.json();
-    } catch (err) {
-      json = null;
-    } finally {
-        console.log("Nova chamada");
-      setProducts(json.products);      
-    }
-  },[AddMessage]);
+    };
+    AllProducts();
+  }, [AddMessage]);
 
   return (
     <ProductsContext.Provider value={{ products }}>
@@ -45,7 +41,5 @@ const ProductsProvider = ({ children }) => {
     </ProductsContext.Provider>
   );
 };
-
-
 
 export { ProductsProvider, useProducts };

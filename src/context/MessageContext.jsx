@@ -11,10 +11,11 @@ const useMessage = () => {
 const MessageProvider = ({ children }) => {
   const [message, setMessage] = useState([]);
 
-  const AddMessage = useCallback((message) => {
-    const newMessage = message;
-    setMessage([newMessage]);
-    setTimeout(() => setMessage([]),2000);
+  const AddMessage = useCallback(({msg}) => {
+    
+    const newMessage = msg;
+    setMessage(newMessage);
+    if(msg !== "") setTimeout(() => setMessage(""), 3000);
   },[]);
   return (
     <MessageContext.Provider value={{ AddMessage }}>
