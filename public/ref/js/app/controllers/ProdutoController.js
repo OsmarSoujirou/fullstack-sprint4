@@ -30,7 +30,7 @@ class ProdutoController {
           .forEach((produto) => {
             console.log(produto);
             this._listaProdutos.adiciona(produto);
-            console.log("Produtos carregados com sucesso!");
+            
           })
       )
       .catch((erro) => (this._mensagem.texto = erro));

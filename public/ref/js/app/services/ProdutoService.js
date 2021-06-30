@@ -9,8 +9,7 @@ class ProdutoService {
       .then((produtos) =>
         produtos.map((p) => new Produto(p.imagem, p.descricao, p.valor))
       )
-      .catch((erro) => {
-        console.log(erro);
+      .catch((erro) => {        
         window.alert("Não foi possível obter os produtos");
       });
   }
