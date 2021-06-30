@@ -1,18 +1,17 @@
 import React from 'react';
 import './App.css';
-import Alert from './components/alert/Alert';
 import Header from './components/header/Header';
 import Main from './components/main/Main';
 import Footer from './components/footer/Footer';
+import AppProvider from './context';
 
 function App() {
   return (
-    <>
-     <Alert msg=""/>
+    <AppProvider>     
      <Header />
      <Main />
      <Footer />
-    </>
+    </AppProvider>
   );
 }
 //
