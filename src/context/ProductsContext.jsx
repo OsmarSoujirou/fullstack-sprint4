@@ -11,6 +11,8 @@ const useProducts = () => {
 
 const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  
+
   const { AddMessage } = useMessage();
 
   useEffect(() => {
@@ -27,7 +29,7 @@ const ProductsProvider = ({ children }) => {
           AddMessage({ msg: "Erro ao carregar os dados dos produtos !" });
         } else {
           setProducts(json.products);
-          console.log("Categorias importados com sucesso!")
+          console.log("Produtos importados com sucesso!")
           AddMessage({ msg: "Produtos importados com sucesso!" });
         }
       }

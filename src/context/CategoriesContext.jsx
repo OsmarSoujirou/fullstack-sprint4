@@ -11,6 +11,7 @@ const useCategories = () => {
 
 const CategoriesProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
+  
   const { AddMessage } = useMessage();
 
   useEffect(() => {
