@@ -1,9 +1,8 @@
-import React from "react";
-import { Breadcrumbs } from "./breadcrumbs/Breadcrumbs";
-import { Products } from "./products/Products";
-import { Filters } from "./filters/Filters";
-import { useProducts } from "../../context/ProductsContext";
-
+import React from 'react';
+import { Breadcrumbs } from './breadcrumbs/Breadcrumbs';
+import { Products } from './products/Products';
+import { Filters } from './filters/Filters';
+import { useProducts } from '../../context/ProductsContext';
 
 function Main() {
   const { products } = useProducts();
@@ -11,9 +10,9 @@ function Main() {
 
   return (
     <main className="main">
-      <Breadcrumbs /> 
-      {filters.length > 0 ? <Filters /> : ""}
-      {products.length > 0  ? <Products /> : ""}
+      <Breadcrumbs />
+      {filters.length ? <Filters /> : ''}
+      {products.length ? <Products /> : ''}
     </main>
   );
 }

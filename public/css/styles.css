@@ -35,6 +35,9 @@ html input {
   z-index: 99999;
   background-color: rgba(255, 255, 255, 0.5);
 }
+._404 {
+  padding: 180px;
+}
 .loading .img,
 .loading--active .img {
   position: absolute;
@@ -182,6 +185,7 @@ html input {
   margin: 0 auto;
   width: 80%;
   max-width: 1100px;
+  min-height: 500px;
   padding: 16px;
 }
 .main__breadcrumbs {

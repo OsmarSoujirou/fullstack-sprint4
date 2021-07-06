@@ -30,7 +30,7 @@ const SearchProvider = ({ children }) => {
         setSearch({
           teste: true,
           array: result,
-          optional: 'Ops... não encontramos nada.',
+          optional: 'Ops, não encontramos nada em sua busca.',
         });
       }
     } else {

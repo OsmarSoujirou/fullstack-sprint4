@@ -21,7 +21,7 @@ const Products = () => {
         <div className="products__row">
           <ol className="products__list">
             {search.teste ? productsSearch : productsView}
-            {search.optional && search.optional}
+            {search.optional && <div className="_404">{search.optional}</div>}
           </ol>
         </div>
       </div>
