@@ -1,6 +1,7 @@
-import React, { useState, createContext, useEffect, useContext } from "react";
-import { ProductsService } from "../services/ProductsService";
-import { useMessage } from "./MessageContext";
+import React, { useState, useContext, createContext, useEffect } from 'react';
+import { useMessage } from './MessageContext';
+import { FetService } from '../services/FetService';
+import { useLoading } from './LoadingContext';
 
 const CategoriesContext = createContext();
 
@@ -11,34 +12,31 @@ const useCategories = () => {
 
 const CategoriesProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
-  
+  const [breadcumbs, setBreadcumbs] = useState([]);
   const { AddMessage } = useMessage();
 
-  useEffect(() => {
+  const { addRequest, removeRequest } = useLoading();
 
-    const AllCategories = async () => {
-      let json;
+  useEffect(() => {
+    const getItems = async () => {
+      addRequest();
 
       try {
-        json = await ProductsService(
-          "http://localhost:3000/data/categories.json"
-        );
+        const json = await FetService('data/categories.json');
+        setCategories(json.all);
+        setBreadcumbs(json.current);
+        AddMessage({ msg: 'Categorias importadas com sucesso!' });
+        AddMessage({ msg: 'Breadcumbs importados com sucesso!' });
+      } catch (error) {
+        AddMessage({ msg: 'Ocorreu um erro ao buscar a API Categories!' });
       } finally {
-        if (json === undefined) {
-          AddMessage({ msg: "Erro ao carregar categorias!" });
-        } else {
-           
-          setCategories(json.all);
-          console.log("Categorias importados com sucesso!")
-         // AddMessage({ msg: "Categorias importados com sucesso!" });
-        }
+        removeRequest();
       }
     };
-    AllCategories();
-  }, [AddMessage]);
-
+    setTimeout(() => getItems(), 500);
+  }, [AddMessage, addRequest, removeRequest]);
   return (
-    <CategoriesContext.Provider value={{ categories }}>
+    <CategoriesContext.Provider value={{ categories, breadcumbs }}>
       {children}
     </CategoriesContext.Provider>
   );

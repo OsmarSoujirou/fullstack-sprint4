@@ -1,34 +1,19 @@
 import React from "react";
+import { useProducts } from "../../../context/ProductsContext";
+import { FilterItem } from "./filtersItem/FilterItem";
 
-function Filters() {
+const Filters = () => {
+  const {filters} = useProducts();
+
+  const viewFilters = filters.map((filter) => <FilterItem key={filter.id} filter={filter}/>);
+
   return (
     <>
-     <section className="main__filters filters">
-        <ul className="filters__list">
-          <li className="filters__item">
-            <span className="filters__label">Tamanho</span>
-            <img className="filters__img" src="assets/filter.svg" alt=""/>
-          </li>
-          <li className="filters__item">
-            <span className="filters__label">Cor</span>
-            <img className="filters__img" src="assets/filter.svg" alt=""/>
-          </li>
-          <li className="filters__item">
-            <span className="filters__label">Departamento</span>
-            <img className="filters__img" src="assets/filter.svg" alt=""/>
-          </li>
-          <li className="filters__item">
-            <span className="filters__label">Categoria</span>
-            <img className="filters__img" src="assets/filter.svg" alt=""/>
-          </li>
-          <li className="filters__item">
-            <span className="filters__label">Manga</span>
-            <img className="filters__img" src="assets/filter.svg" alt=""/>
-          </li>
-        </ul>
+      <section className="main__filters filters">
+        <ul className="filters__list">{viewFilters}</ul>
       </section>
     </>
   );
 }
 
-export default Filters;
+export {Filters};

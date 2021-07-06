@@ -1,28 +1,31 @@
 import React, { useState, createContext, useContext, useCallback } from "react";
-import Message from "../components/message/Message";
+
 
 const MessageContext = createContext();
 
+/* Para exportar o contexto */
 const useMessage = () => {
   const context = useContext(MessageContext);
   return context;
 };
 
+/* Criação do Provider */
 const MessageProvider = ({ children }) => {
-  const [message, setMessage] = useState([]);
+  const [messages, setMessage] = useState([]);
 
-  const AddMessage = useCallback(({msg}) => {
-    
-    const newMessage = msg;
-    setMessage(newMessage);
-    if(msg !== "") setTimeout(() => setMessage(""), 3000);
-  },[]);
+  const AddMessage = useCallback(({ msg }) => {
+    setMessage((old) => [msg, ...old]);
+    setTimeout(() => setMessage((messages) => messages.filter((mess) => mess !== msg))
+    , 2000);
+  },[])
+
+
   return (
-    <MessageContext.Provider value={{ AddMessage }}>
+    <MessageContext.Provider value={{ AddMessage, messages }}>
       {children}
-      <Message message={message} />
     </MessageContext.Provider>
   );
 };
 
-export {MessageProvider, useMessage};
+/* Exportação das funções publicas */
+export { MessageProvider, useMessage };

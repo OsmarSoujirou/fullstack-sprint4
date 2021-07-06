@@ -1,31 +1,23 @@
 import React from "react";
+import { BreadcrumbsItem } from "./breadcrumbsItem/BreadcrumbItem";
+import { useCategories } from "../../../context/CategoriesContext";
 
-function Breadcrumbs() {
+const Breadcrumbs = () => {
+  const { breadcumbs } = useCategories();
+
+  const viewBreadcrumbs = breadcumbs.map((breadcumb) => (
+    <BreadcrumbsItem key={breadcumb.id} breadcumb={breadcumb} />
+  ));
+
   return (
     <>
-     <section className="main__breadcrumbs breadcrumbs">
+      <section className="main__breadcrumbs breadcrumbs">
         <nav>
-          <ol className="breadcrumbs__list">
-            <li className="breadcrumbs__item">
-              <a className="breadcrumbs__link" href="#link">Home</a>
-            </li>
-            <li className="breadcrumbs__item  breadcrumbs__separator">/</li>
-            <li className="breadcrumbs__item">
-              <a className="breadcrumbs__link" href="#link">Infantil</a>
-            </li>
-            <li className="breadcrumbs__item breadcrumbs__separator">/</li>
-            <li className="breadcrumbs__item">
-              <a className="breadcrumbs__link" href="#link">Personagens</a>
-            </li>
-            <li className="breadcrumbs__item breadcrumbs__separator">/</li>
-            <li className="breadcrumbs__item breadcrumbs__item--active">
-              <span className="breadcrumbs__link">Mario Bros</span>
-            </li>
-          </ol>
+          <ol className="breadcrumbs__list">{viewBreadcrumbs}</ol>
         </nav>
       </section>
     </>
   );
-}
+};
 
-export default Breadcrumbs;
+export { Breadcrumbs };

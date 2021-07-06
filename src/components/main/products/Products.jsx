@@ -1,29 +1,32 @@
-import React from "react";
-import Product from "./product/Product";
-import { useProducts } from "../../../context/ProductsContext";
+import React from 'react';
+import { Product } from './product/Product';
+import { useProducts } from '../../../context/ProductsContext';
+import { useSearch } from '../../../context/SearchContext';
 
-
-function Products() {
+const Products = () => {
   const { products } = useProducts();
- 
-  const productsView =  products.map((product) => (
-      <Product key={product.sku} product={product} />
-    ));
+  const { search } = useSearch();
 
-   
-  
+  const productsView = products.map((product) => (
+    <Product key={product.sku} product={product} />
+  ));
+  //console.log(search.optional);
+  const productsSearch = search.array.map((product) => (
+    <Product key={product.sku} product={product} />
+  ));
+
   return (
     <section className="main__products products">
-    <div id="produtosView">
-    <div className="products__row">
-      <ol className="products__list">
-        {productsView}       
-      </ol>
-      
-    </div>
-    </div>
+      <div id="produtosView">
+        <div className="products__row">
+          <ol className="products__list">
+            {search.teste ? productsSearch : productsView}
+            {search.optional && search.optional}
+          </ol>
+        </div>
+      </div>
     </section>
   );
-}
+};
 
-export default Products;
+export { Products };

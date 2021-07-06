@@ -1,6 +1,6 @@
 import React from "react";
 
-function Product({ product }) {
+const Product = ({ product }) => {
     const { name, image, price } = product;
     return (
    
@@ -19,4 +19,4 @@ function Product({ product }) {
     );
 }
 
-export default Product;
+export {Product};
